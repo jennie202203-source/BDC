@@ -182,7 +182,7 @@ function renderFlash(){
   if (!currentCard){
     const done = document.createElement('div');
     done.innerHTML = `
-      <div class="def">🎉 恭喜，你已完成本章所有闪卡！右侧已解锁测试，请前往完成配对练习。</div>
+      <div class="def">🎉 恭喜，你已完成本章所有闪卡！已解锁测试，请前往完成配对练习。</div>
       <div class="row">
         <span class="pill">累计学会：${learned.size} / ${WORDS.length}</span>
         <button onclick="restartDeck()" title="重置并重新练习">重新开始本章</button>
