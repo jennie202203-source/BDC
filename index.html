@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>托业词汇｜第1章 办公室事宜（Office matters 1）</title>
+<style>
+  :root{
+    --bg:#ffffff; --fg:#0f172a; --muted:#607087; --brand:#16a34a; --brand2:#0ea5e9;
+    --card:#f8fafc; --line:#e5e7eb; --warn:#ef4444; --ok:#22c55e; --amber:#f59e0b;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial}
+  header{position:sticky;top:0;background:linear-gradient(90deg,#fff, #f0f9ff);border-bottom:1px solid var(--line);padding:12px 16px;display:flex;gap:12px;align-items:center;z-index:10}
+  header h1{font-size:18px;margin:0;color:var(--fg);font-weight:700}
+  .chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);padding:6px 10px;border-radius:999px;background:#fff}
+  .chip label{font-size:12px;color:var(--muted)}
+  .chip select{border:none;background:transparent;outline:none;font-size:14px;color:var(--fg)}
+  main{max-width:1080px;margin:0 auto;padding:20px 16px 60px}
+  .section-title{display:flex;align-items:center;gap:10px;margin:20px 0 10px}
+  .section-title h2{margin:0;font-size:18px}
+  .grid{display:grid;grid-template-columns:1fr;gap:16px}
+  @media(min-width:900px){.grid{grid-template-columns:1.1fr .9fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 2px 8px rgba(15,23,42,.05)}
+  .flash{display:flex;flex-direction:column;gap:12px}
+  .word{display:flex;align-items:baseline;gap:10px}
+  .word b{font-size:28px;color:var(--fg)}
+  .ipa{font-family: "SF Mono","JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;font-size:14px;color:var(--muted)}
+  .def{font-size:15px;line-height:1.6;color:#0f172a;background:#fff;border:1px dashed var(--line);border-radius:12px;padding:12px}
+  .actions{display:flex;gap:10px;flex-wrap:wrap}
+  button{cursor:pointer;border:1px solid var(--line);padding:10px 14px;border-radius:999px;background:#fff;color:#0f172a;font-weight:600}
+  button:hover{border-color:#cbd5e1;box-shadow:0 1px 4px rgba(2,6,23,.06)}
+  .btn-ok{background:linear-gradient(90deg,#10b981,#22c55e);color:#fff;border:none}
+  .btn-no{background:#fff;border:2px solid var(--warn);color:#b91c1c}
+  .btn-maybe{background:#fff;border:2px solid var(--amber);color:#92400e}
+  .tiny{font-size:12px;color:var(--muted)}
+  .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .pill{padding:4px 8px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--muted);font-size:12px}
+  .quiz{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .tile{user-select:none;background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px;min-height:56px;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;transition:.15s}
+  .tile.eng{color:#111827}
+  .tile.cn{color:#0f766e}
+  .tile:hover{transform:translateY(-2px);box-shadow:0 4px 14px rgba(2,6,23,.06)}
+  .tile.selected{border-color:var(--brand2);outline:3px solid rgba(14,165,233,.2)}
+  .tile.ok{animation:blinkok .35s 2}
+  .tile.bad{animation:blinkbad .35s 2}
+  @keyframes blinkok{50%{background:#dcfce7;border-color:#22c55e}}
+  @keyframes blinkbad{50%{background:#fee2e2;border-color:#ef4444}}
+  .footer-note{margin-top:10px;color:var(--muted);font-size:13px}
+  .kbd{font-family:ui-monospace,Menlo,Consolas,monospace;background:#eef2ff;border:1px solid #c7d2fe;border-radius:6px;padding:2px 6px}
+  .divider{height:1px;background:var(--line);margin:8px 0 16px}
+  .hidden{display:none}
+  .notice{background:#fff7ed;border:1px solid #fed7aa;color:#92400e;padding:10px 12px;border-radius:10px;font-size:14px}
+</style>
+</head>
+<body>
+<header>
+  <h1>第1章 办公室事宜（Office matters 1）</h1>
+  <div class="chip">
+    <label for="dial">发音 / 音标：</label>
+    <select id="dial">
+      <option value="us">美音（American）</option>
+      <option value="uk">英音（British）</option>
+    </select>
+  </div>
+</header>
+
+<main>
+  <div class="grid">
+    <!-- 左侧：闪卡 -->
+    <section class="card">
+      <div class="section-title">
+        <h2>单词闪卡</h2>
+        <span class="tiny">点击喇叭 ▶︎ 可发音；学完将自动解锁右侧测试</span>
+      </div>
+      <div id="flashwrap" class="flash"></div>
+    </section>
+
+    <!-- 右侧：测试（完成闪卡后显示） -->
+    <section id="quizSection" class="card hidden">
+      <div class="section-title">
+        <h2>测试：英中配对「消消乐」</h2>
+        <span class="tiny">匹配正确后闪烁消失，错误将保留</span>
+      </div>
+      <div id="quiz" class="quiz"></div>
+      <div class="footer-note">
+        小提示：可随时切换上方口音；测试使用与本章相同的词汇与释义。
+      </div>
+    </section>
+  </div>
+
+  <div class="divider"></div>
+  <p class="tiny">
+    数据来源：《托业词汇&短语&金融英语归纳讲义》第一章“办公室事宜 Office matters（1）”
+  </p>
+</main>
+
+<script>
+/* -------------------- 词表 -------------------- */
+const WORDS = [
+  {w:"appointment", cn:"约会；约定", ipa:{us:"/əˈpɔɪntmənt/", uk:"/əˈpɔɪntmənt/"}},
+  {w:"attendance", cn:"出席人数；出席", ipa:{us:"/əˈtendəns/", uk:"/əˈtendəns/"}},
+  {w:"cabinet", cn:"橱柜", ipa:{us:"/ˈkæbɪnət/", uk:"/ˈkæbɪnɪt/"}},
+  {w:"calendar", cn:"日历；月历；行事历", ipa:{us:"/ˈkælɪndər/", uk:"/ˈkælɪndə/"}},
+  {w:"clerk", cn:"办事员；书记", ipa:{us:"/klɜːrk/", uk:"/klɑːk/"}},
+  {w:"directory", cn:"人名住址簿；名录", ipa:{us:"/dɪˈrektəri, daɪ-/", uk:"/dɪˈrektəri/"}},
+  {w:"duplicate", cn:"复制；副本", ipa:{us:"/ˈduːplɪkət/", uk:"/ˈdjuːplɪkət/"}},
+  {w:"filing", cn:"归档", ipa:{us:"/ˈfaɪlɪŋ/", uk:"/ˈfaɪlɪŋ/"}},
+  {w:"in-tray", cn:"待处理文件盒", ipa:{us:"/ˈɪn treɪ/", uk:"/ˈɪn treɪ/"}},
+  {w:"monitor", cn:"检测；监视；追踪", ipa:{us:"/ˈmɑːnɪtər/", uk:"/ˈmɒnɪtə/"}},
+  {w:"out-tray", cn:"已处理文件盒", ipa:{us:"/ˈaʊt treɪ/", uk:"/ˈaʊt treɪ/"}},
+  {w:"partition", cn:"分隔；分隔物", ipa:{us:"/pɑːrˈtɪʃən/", uk:"/pɑːˈtɪʃ(ə)n/"}},
+  {w:"postage", cn:"邮费", ipa:{us:"/ˈpoʊstɪdʒ/", uk:"/ˈpəʊstɪdʒ/"}},
+  {w:"punctuality", cn:"准时；守时", ipa:{us:"/ˌpʌŋktʃuˈæləti/", uk:"/ˌpʌŋktʃuˈælɪti/"}},
+  {w:"schedule", cn:"时间表；计划表", ipa:{us:"/ˈskedʒuːl/", uk:"/ˈʃedjuːl/"}},
+  {w:"shift", cn:"换班；轮班；值班", ipa:{us:"/ʃɪft/", uk:"/ʃɪft/"}},
+  {w:"staff", cn:"全体职员", ipa:{us:"/stæf/", uk:"/stɑːf/"}},
+  {w:"strike", cn:"罢工", ipa:{us:"/straɪk/", uk:"/straɪk/"}},
+  {w:"task", cn:"工作；任务", ipa:{us:"/tæsk/", uk:"/tɑːsk/"}},
+  {w:"workforce", cn:"工作人员；劳动人口", ipa:{us:"/ˈwɜːrkfɔːrs/", uk:"/ˈwɜːkfɔːs/"}}
+];
+
+/* -------------------- 学习状态 -------------------- */
+let deck = WORDS.map((x, i) => ({...x, id:i}));
+let reviewQueue = [];
+const learned = new Set();
+let currentCard = null;
+
+const dialSel = document.getElementById('dial');
+dialSel.addEventListener('change', renderFlash);
+
+function shuffle(arr){
+  return arr
+    .map(v => ({v, r:Math.random()}))
+    .sort((a,b)=>a.r-b.r)
+    .map(({v})=>v);
+}
+
+function pickNextCard(){
+  if (!deck.length && reviewQueue.length){
+    deck = shuffle(reviewQueue);
+    reviewQueue = [];
+  }
+  if (!deck.length) return null;
+  return deck[0];
+}
+
+function removeCurrent(){
+  if (deck.length) deck.shift();
+}
+
+function enqueueReview(card, times=1){
+  for (let i=0;i<times;i++){
+    const pos = Math.max(1, Math.floor(Math.random()*(deck.length+3)));
+    deck.splice(pos, 0, {...card, ghost:true, ghostId:Math.random()});
+  }
+}
+
+/* -------------------- 朗读 -------------------- */
+function speak(text, dialect){
+  const synth = window.speechSynthesis;
+  if (!synth) return alert('你的浏览器不支持合成语音。可正常学习，但无法朗读。');
+  const u = new SpeechSynthesisUtterance(text);
+  const voices = synth.getVoices();
+  const target = dialect==='uk'
+    ? (voices.find(v=>/en-GB|en_GB|English \(United Kingdom\)/.test(v.lang || v.name)) || voices.find(v=>/English/.test(v.lang||v.name)))
+    : (voices.find(v=>/en-US|en_US|English \(United States\)/.test(v.lang || v.name)) || voices.find(v=>/English/.test(v.lang||v.name)));
+  if (target) u.voice = target;
+  u.rate = 0.95; u.pitch = 1; u.lang = (dialect==='uk'?'en-GB':'en-US');
+  synth.cancel();
+  synth.speak(u);
+}
+
+/* -------------------- 闪卡渲染 -------------------- */
+function renderFlash(){
+  const box = document.getElementById('flashwrap');
+  box.innerHTML = '';
+  currentCard = pickNextCard();
+
+  // 所有闪卡结束：显示完成提示并解锁测试
+  if (!currentCard){
+    const done = document.createElement('div');
+    done.innerHTML = `
+      <div class="def">🎉 恭喜，你已完成本章所有闪卡！右侧已解锁测试，请前往完成配对练习。</div>
+      <div class="row">
+        <span class="pill">累计学会：${learned.size} / ${WORDS.length}</span>
+        <button onclick="restartDeck()" title="重置并重新练习">重新开始本章</button>
+      </div>
+    `;
+    box.appendChild(done);
+    showQuiz(); // 解锁并构建测试
+    return;
+  }
+
+  // 进行中：隐藏测试区
+  hideQuiz();
+
+  const dialect = dialSel.value;
+  const ipaText = dialect==='uk' ? currentCard.ipa.uk : currentCard.ipa.us;
+  const progress = learned.size; // 已学会数量
+
+  const wrap = document.createElement('div');
+  wrap.innerHTML = `
+    <div class="row">
+      <span class="pill">进度：${progress}/${WORDS.length}</span>
+      <span class="pill">剩余（含复现）：${deck.length}</span>
+      <span class="pill">本卡ID：#${currentCard.id+1}</span>
+    </div>
+    <div class="word">
+      <b>${currentCard.w}</b>
+      <button title="发音" aria-label="发音" onclick="speak('${currentCard.w}','${dialSel.value}')">▶︎ 发音</button>
+    </div>
+    <div class="ipa tiny">音标（${dialect==='uk'?'英音 / BrE':'美音 / AmE'}）：<span>${ipaText}</span></div>
+    <div class="def"><b>较长释义：</b> ${currentCard.cn}</div>
+    <div class="actions">
+      <button class="btn-ok" onclick="mark('learned')">我学会了</button>
+      <button class="btn-no" onclick="mark('no')">我没学会</button>
+      <button class="btn-maybe" onclick="mark('maybe')">不太确定</button>
+      <span class="tiny">规则：没学会将随机复现2次；不确定将复现1次。</span>
+    </div>
+  `;
+  box.appendChild(wrap);
+}
+
+function mark(type){
+  if (!currentCard) return;
+  // 永远先移除当前
+  removeCurrent();
+  if (type==='learned'){
+    learned.add(currentCard.id);
+  } else if (type==='no'){
+    enqueueReview(currentCard, 2);
+  } else if (type==='maybe'){
+    enqueueReview(currentCard, 1);
+  }
+  renderFlash();
+}
+
+function restartDeck(){
+  deck = WORDS.map((x,i)=>({...x,id:i}));
+  reviewQueue = [];
+  learned.clear?.();
+  currentCard = null;
+  renderFlash();
+}
+
+/* -------------------- 测试：英中配对（完成后显示） -------------------- */
+function showQuiz(){
+  const sec = document.getElementById('quizSection');
+  if (sec.classList.contains('hidden')) sec.classList.remove('hidden');
+  buildQuiz();
+}
+
+function hideQuiz(){
+  const sec = document.getElementById('quizSection');
+  if (!sec.classList.contains('hidden')) sec.classList.add('hidden');
+}
+
+function buildQuiz(){
+  const q = document.getElementById('quiz');
+  q.innerHTML = '';
+  const eng = WORDS.map(x=>({type:'eng', key:x.w, text:x.w}));
+  const cn = WORDS.map(x=>({type:'cn', key:x.w, text:x.cn}));
+  const tiles = shuffle([...eng, ...cn]);
+  tiles.forEach((t)=>{
+    const div = document.createElement('div');
+    div.className = `tile ${t.type}`;
+    div.dataset.key = t.key;
+    div.dataset.type = t.type;
+    div.tabIndex = 0;
+    div.innerText = t.text;
+    div.addEventListener('click', ()=>onTileClick(div));
+    q.appendChild(div);
+  });
+}
+
+let sel = null;
+function onTileClick(el){
+  if (el.classList.contains('ok')) return;
+  if (!sel){
+    sel = el;
+    el.classList.add('selected');
+    return;
+  }
+  if (sel === el){
+    sel.classList.remove('selected');
+    sel = null;
+    return;
+  }
+  const match = (sel.dataset.key === el.dataset.key) && (sel.dataset.type !== el.dataset.type);
+  if (match){
+    flashPair(sel, el, true);
+    speak(sel.dataset.key, dialSel.value); // 正确匹配奖励发音
+    setTimeout(()=>{
+      sel.style.visibility = 'hidden';
+      el.style.visibility = 'hidden';
+      sel.classList.remove('selected'); el.classList.remove('selected');
+      sel = null;
+      const rest = [...document.querySelectorAll('.tile')].filter(t=>t.style.visibility!=='hidden');
+      if (rest.length===0){
+        const done = document.createElement('div');
+        done.className='def';
+        done.style.gridColumn='1 / span 2';
+        done.style.background='#ecfeff';
+        done.style.border='1px solid #bae6fd';
+        done.style.borderRadius='12px';
+        done.style.padding='14px';
+        done.innerHTML='✅ 测试完成！你已成功匹配本章所有词汇。点击刷新可重新挑战。';
+        document.getElementById('quiz').appendChild(done);
+      }
+    }, 320);
+  }else{
+    flashPair(sel, el, false);
+    sel.classList.remove('selected');
+    sel = null;
+  }
+}
+
+function flashPair(a,b,ok){
+  [a,b].forEach(x=>{
+    x.classList.remove('ok','bad','selected');
+    x.classList.add(ok?'ok':'bad');
+    setTimeout(()=>x.classList.remove('ok','bad'), 400);
+  });
+}
+
+/* -------------------- 初始化 -------------------- */
+renderFlash();
+if ('speechSynthesis' in window){
+  window.speechSynthesis.onvoiceschanged = () => {};
+}
+</script>
+</body>
+</html>
